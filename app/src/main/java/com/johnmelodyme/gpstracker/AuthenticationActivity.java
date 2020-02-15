@@ -14,7 +14,6 @@ package com.johnmelodyme.gpstracker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,13 +23,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
 
 public class AuthenticationActivity extends AppCompatActivity {
     private static final String TAG = "GPSTRACKER";
@@ -139,12 +136,33 @@ public class AuthenticationActivity extends AppCompatActivity {
                         userPassword.setError(err_pass);
                     }
                 }
+
+                progressBar.setVisibility(View.VISIBLE);
+
+                // Attempt Login Registered Firebase User :
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(AuthenticationActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> USER_LOGIN) {
+                                if(USER_LOGIN.isSuccessful()){
+                                    Log.d(TAG, "Welcome back" + email);
+                                    dispToast("Welcome back" + email);
+                                    Intent goToTrackerActivity;
+                                    goToTrackerActivity = new Intent(AuthenticationActivity.this, TrackerActivity.class);
+                                    startActivity(goToTrackerActivity);
+                                    Log.d(TAG, "Redirecting to TrackingActivity.class");
+                                } else {
+                                    dispToast("Invalid User");
+                                    Log.d(TAG,"failed to Login " + email );
+                                }
+                            }
+                        });
             }
         });
     }
 
-    public void dispToast(String s){
-        Toast.makeText(getApplicationContext(), s,
+    public void dispToast(String string){
+        Toast.makeText(getApplicationContext(), string,
                 Toast.LENGTH_SHORT)
                 .show();
     }
