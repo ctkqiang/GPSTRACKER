@@ -113,11 +113,45 @@ public class AuthenticationActivity extends AppCompatActivity {
                         });
             }
         });
+
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email, password, err_email, err_pass;
+                // Get String from `EditText`
+                email = userEmail.getText()
+                        .toString()
+                        .trim();
+
+                password = userPassword.getText()
+                        .toString()
+                        .trim();
+
+                // Get String Res:
+                err_email = getResources().getString(R.string.pleaseenteremail);
+                err_pass = getResources().getString(R.string.pleaseenterpass);
+
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                    if (TextUtils.isEmpty(email)){
+                        userEmail.setError(err_email);
+                    }else {
+                        userPassword.setError(err_pass);
+                    }
+                }
+            }
+        });
     }
 
     public void dispToast(String s){
         Toast.makeText(getApplicationContext(), s,
                 Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.GONE);
     }
 }

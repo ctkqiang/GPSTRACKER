@@ -9,7 +9,7 @@ package com.johnmelodyme.gpstracker;
  * ********************************************************
  * @AUTHOR: John Melody Melissa
  * @REFERENCE: https://github.com/johnmelodyme/GPSTRACKER
- * This application inspired by @Cindy, My Baby.
+ * This application inspired by @TanSinDee, My Baby.
  */
 
 import androidx.appcompat.app.AppCompatActivity;
