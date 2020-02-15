@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "848420926266",
+    "firebase_url": "https://traackergps.firebaseio.com",
+    "project_id": "traackergps",
+    "storage_bucket": "traackergps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848420926266:android:454e88334f44cb7600d603",
+        "android_client_info": {
+          "package_name": "com.johnmelodyme.gpstracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848420926266-i8rosqstqkaas3vj27rhqqugegav9kjn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.johnmelodyme.gpstracker",
+            "certificate_hash": "a44f0a8394a2c488158030a8f9c2efac2245dbb4"
+          }
+        },
+        {
+          "client_id": "848420926266-t15gngj9g2ba6ff1cs7kdrs213n3dmcg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWbYUenuYd75syfgDuuxKxpmklIcFwJrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848420926266-t15gngj9g2ba6ff1cs7kdrs213n3dmcg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
