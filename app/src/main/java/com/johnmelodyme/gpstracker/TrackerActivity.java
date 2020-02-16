@@ -13,6 +13,7 @@ package com.johnmelodyme.gpstracker;
  */
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
@@ -20,6 +21,8 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.johnmelodyme.gpstracker.service.TrackingService;
 
 public class TrackerActivity extends AppCompatActivity {
@@ -48,14 +51,28 @@ public class TrackerActivity extends AppCompatActivity {
         if (permission == PackageManager.PERMISSION_GRANTED) {
             startTrackingService();
         } else {
+            // TODO If the app doesn’t currently have access to the user’s location, then request access:
+            ActivityCompat.requestPermissions(TrackerActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST);
             Log.d(TAG, "onCreate: ");
         }
-}
+    }
 
     // TODO TrackingService Invocation
     private void startTrackingService() {
         Intent Service;
         Service = new Intent(TrackerActivity.this, TrackingService.class);
         startService(Service);
+        dispToast("GPS tracking enabled");
+        Log.d(TAG, "startTrackingService: \"GPS tracking enabled\" ");
+        finish();
+    }
+
+    // TODO TOAST
+    public void dispToast(String string) {
+        Toast.makeText(getApplicationContext(), string,
+                Toast.LENGTH_SHORT)
+                .show();
     }
 }
