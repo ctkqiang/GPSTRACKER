@@ -1,4 +1,5 @@
 package com.johnmelodyme.gpstracker;
+
 /**
  * @Copyright : Copyright © 2020 John Melody Melissa
  * ********************************************************
@@ -28,7 +29,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
 public class AuthenticationActivity extends AppCompatActivity {
     private static final String TAG = "GPSTRACKER";
     private Button btnLogin, btnRegister;
@@ -49,14 +49,14 @@ public class AuthenticationActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.user_email);
         userPassword = findViewById(R.id.user_password);
 
-        // Firebase Declaration:
+        // TODO Firebase Declaration:
         firebaseAuth = FirebaseAuth.getInstance();
 
         // TODO REGISTRATION BUTTON LISTENER:
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Check Use Email and Password {format}
+                // TODO Check Use Email and Password {format}
                 final String email, password, err_email, err_pass, weakpass;
 
                 // Get String from `EditText`
@@ -74,12 +74,12 @@ public class AuthenticationActivity extends AppCompatActivity {
                 weakpass = getResources().getString(R.string.weakP);
 
                 // Make it `invalid` if $user leave EditText blank or weak password:
-                if (TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     userEmail.setError(err_email);
                     Log.d(TAG, err_email);
                 }
 
-                if (TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     if (password.length() < 6) {
                         userPassword.setError(weakpass);
                     } else {
@@ -89,13 +89,13 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                // Create user Profile Firebase :
+                // TODO Create user Profile Firebase :
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(AuthenticationActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> CREATE_AN_USER_ACCOUNT) {
-                                // Listen for accountability:
-                                if (CREATE_AN_USER_ACCOUNT.isSuccessful()){
+                                // TODO Listen for accountability:
+                                if (CREATE_AN_USER_ACCOUNT.isSuccessful()) {
                                     Log.d(TAG, "Welcome " + email);
                                     dispToast("Welcome " + email);
                                     Intent goToTrackerActivity;
@@ -104,14 +104,14 @@ public class AuthenticationActivity extends AppCompatActivity {
                                     Log.d(TAG, "Redirecting to TrackingActivity.class");
                                 } else {
                                     dispToast("failed to create user " + email);
-                                    Log.d(TAG,"failed to create user " + email );
+                                    Log.d(TAG, "failed to create user " + email);
                                 }
                             }
                         });
             }
         });
 
-
+        // TODO LOGIN BUTTON LISTENER:
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,22 +129,22 @@ public class AuthenticationActivity extends AppCompatActivity {
                 err_email = getResources().getString(R.string.pleaseenteremail);
                 err_pass = getResources().getString(R.string.pleaseenterpass);
 
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-                    if (TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    if (TextUtils.isEmpty(email)) {
                         userEmail.setError(err_email);
-                    }else {
+                    } else {
                         userPassword.setError(err_pass);
                     }
                 }
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                // Attempt Login Registered Firebase User :
+                // TODO Attempt Login Registered Firebase User :
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(AuthenticationActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> USER_LOGIN) {
-                                if(USER_LOGIN.isSuccessful()){
+                                if (USER_LOGIN.isSuccessful()) {
                                     Log.d(TAG, "Welcome back" + email);
                                     dispToast("Welcome back" + email);
                                     Intent goToTrackerActivity;
@@ -153,7 +153,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                                     Log.d(TAG, "Redirecting to TrackingActivity.class");
                                 } else {
                                     dispToast("Invalid User");
-                                    Log.d(TAG,"failed to Login " + email );
+                                    Log.d(TAG, "failed to Login " + email);
                                 }
                             }
                         });
@@ -161,7 +161,8 @@ public class AuthenticationActivity extends AppCompatActivity {
         });
     }
 
-    public void dispToast(String string){
+    // TODO TOAST
+    public void dispToast(String string) {
         Toast.makeText(getApplicationContext(), string,
                 Toast.LENGTH_SHORT)
                 .show();
